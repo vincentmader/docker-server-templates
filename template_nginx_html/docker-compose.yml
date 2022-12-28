@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  my-server:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ./:/usr/share/nginx/html
+    environment:
+      VIRTUAL_HOST: nginx_html.lo
+    networks:
+      - reverse-proxy
+
+networks:
+  reverse-proxy:
+    external: true
+    name: proxy_my_awesome_proxy_network # same name as in `./proxy/docker-compose.yml` + prefix (see "docker network ls")
