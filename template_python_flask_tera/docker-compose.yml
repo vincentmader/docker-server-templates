@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  my-server:
+    build:
+      context: ./python_flask_server
+    restart: always
+    environment:
+      VIRTUAL_HOST: python_flask_tera.lo
+    ports:
+      - 5004:5555
+    networks:
+      - reverse-proxy
+
+networks:
+  reverse-proxy:
+    external: true
+    name: proxy_my_awesome_proxy_network # same name as in `./proxy/docker-compose.yml` + prefix (see "docker network ls")
